@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "764797152151",
+    "project_id": "beggarhelp",
+    "storage_bucket": "beggarhelp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764797152151:android:b506ca1ffc6e2f839432d2",
+        "android_client_info": {
+          "package_name": "com.example.beggarhelp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "764797152151-prn75gncq41rjl72b74ap17eae96gkdu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaedmJqNrzdxfL_dmjWLvj52vhfSi7vgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "764797152151-prn75gncq41rjl72b74ap17eae96gkdu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
