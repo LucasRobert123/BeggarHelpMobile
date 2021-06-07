@@ -1,7 +1,7 @@
 import 'package:beggarhelp/models/User.dart';
 
 class Company extends User {
-  String cnpj, descricao;
+  String cnpj, description;
 
   Company(
       {id,
@@ -14,7 +14,7 @@ class Company extends User {
       city,
       uf,
       this.cnpj,
-      this.descricao})
+      this.description})
       : super(
           id: id,
           name: name,
@@ -26,4 +26,14 @@ class Company extends User {
           city: city,
           uf: uf,
         );
+
+  @override
+  Map<String, dynamic> toMap() {
+    return {'cnpj': cnpj, 'description': description};
+  }
+
+  @override
+  Company.fromFirestore(Map<String, dynamic> firestoreDocument)
+      : cnpj = firestoreDocument['cnpj'],
+        description = firestoreDocument['description'];
 }

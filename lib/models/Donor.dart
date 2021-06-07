@@ -25,4 +25,12 @@ class Donor extends User {
           city: city,
           uf: uf,
         );
+  @override
+  Map<String, dynamic> toMap() {
+    return {'cpf': cpf};
+  }
+
+  @override
+  Donor.fromFirestore(Map<String, dynamic> firestoreDocument)
+      : cpf = firestoreDocument['cpf'];
 }
