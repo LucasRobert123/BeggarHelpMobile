@@ -2,14 +2,14 @@ import 'package:beggarhelp/components/Button/index.dart';
 import 'package:beggarhelp/components/Input/index.dart';
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginScreenState extends State<LoginScreen> {
   bool stayConnected = false;
   @override
   Widget build(BuildContext context) {
@@ -85,14 +85,19 @@ class _LoginState extends State<Login> {
                       color: Color(0xFF31CF2B),
                     ),
                   ),
-                  Text(
-                    'Cadastre-se',
-                    style: TextStyle(
-                      color: Color(0xFF31CF2B),
-                      decoration: TextDecoration.underline,
-                      fontWeight: FontWeight.w700,
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/register');
+                    },
+                    child: Text(
+                      'Cadastre-se',
+                      style: TextStyle(
+                        color: Color(0xFF31CF2B),
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             )

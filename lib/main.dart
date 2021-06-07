@@ -1,4 +1,5 @@
-import 'package:beggarhelp/pages/Login.dart';
+import 'package:beggarhelp/screen/login_screen.dart';
+import 'package:beggarhelp/screen/register_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +16,10 @@ class MyApp extends StatelessWidget {
         unselectedWidgetColor: Color(0xFF31CF2B),
       ),
       initialRoute: '/',
-      routes: {"/": (context) => Login()},
+      routes: {
+        "/": (context) => LoginScreen(),
+        "/register": (context) => RegisterScreen()
+      },
     );
   }
 }
