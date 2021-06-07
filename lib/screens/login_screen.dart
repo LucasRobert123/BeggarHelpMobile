@@ -72,9 +72,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.white,
                 ),
               ),
+              onPress: () {
+                Navigator.pushNamed(context, '/company');
+              },
             ),
             Container(
-              alignment: Alignment.topLeft,
+              width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.only(top: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,19 +88,26 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Color(0xFF31CF2B),
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/register');
-                    },
-                    child: Text(
-                      'Cadastre-se',
-                      style: TextStyle(
-                        color: Color(0xFF31CF2B),
-                        decoration: TextDecoration.underline,
-                        fontWeight: FontWeight.w700,
+                  SizedBox(
+                    height: 20,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        minimumSize: Size.zero,
+                        padding: EdgeInsets.zero,
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/register');
+                      },
+                      child: Text(
+                        'Cadastre-se',
+                        style: TextStyle(
+                          color: Color(0xFF31CF2B),
+                          decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
-                  ),
+                  )
                 ],
               ),
             )
