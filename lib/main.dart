@@ -1,5 +1,6 @@
 import 'package:beggarhelp/screen/login_screen.dart';
 import 'package:beggarhelp/screen/register_screen.dart';
+import 'package:beggarhelp/screen/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         "/": (context) => LoginScreen(),
-        "/register": (context) => RegisterScreen()
+        "/register": (context) => RegisterScreen(),
+        "/welcome": (context) => WelcomeScreen()
       },
     );
   }
