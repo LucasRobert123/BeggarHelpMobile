@@ -1,14 +1,14 @@
 import 'package:beggarhelp/components/CustomTabBar/index.dart';
 import 'package:flutter/material.dart';
 
-class CompanyScreen extends StatefulWidget {
-  const CompanyScreen({Key key}) : super(key: key);
+class DonorScreen extends StatefulWidget {
+  const DonorScreen({Key key}) : super(key: key);
 
   @override
-  _CompanyScreenState createState() => _CompanyScreenState();
+  _DonorScreenState createState() => _DonorScreenState();
 }
 
-class _CompanyScreenState extends State<CompanyScreen> {
+class _DonorScreenState extends State<DonorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
