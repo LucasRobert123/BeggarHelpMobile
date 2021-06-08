@@ -20,28 +20,30 @@ class FirestoreService {
     return _db.collection(collection).doc(user.id).delete();
   }
 
-  Stream<List<Company>> getCompanies() {
-    return _db.collection('donors').snapshots().map(
-          (snap) => snap.docs
-              .map(
-                (doc) => Company.fromFirestore(
+  Future<List<Company>> getCompanies() {
+    return _db.collection('companies').get().then((snaps) {
+      if (snaps.docs.isNotEmpty) {
+        return snaps.docs
+            .map((doc) => Company.fromFirestore(
                   doc.data(),
-                ),
-              )
-              .toList(),
-        );
+                ))
+            .toList();
+      } else
+        return null;
+    });
   }
 
-  Stream<List<Donor>> getDonors() {
-    return _db.collection('companies').snapshots().map(
-          (snap) => snap.docs
-              .map(
-                (doc) => Donor.fromFirestore(
+  Future<List<Donor>> getDonors() {
+    return _db.collection('donors').get().then((snaps) {
+      if (snaps.docs.isNotEmpty) {
+        return snaps.docs
+            .map((doc) => Donor.fromFirestore(
                   doc.data(),
-                ),
-              )
-              .toList(),
-        );
+                ))
+            .toList();
+      } else
+        return null;
+    });
   }
 
   Future<String> getUserType(String uid) {
