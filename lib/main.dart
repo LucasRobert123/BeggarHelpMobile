@@ -1,4 +1,5 @@
 import 'package:beggarhelp/screens/companyscreen.dart';
+import 'package:beggarhelp/screens/donor_screen.dart';
 import 'package:beggarhelp/screens/login_screen.dart';
 import 'package:beggarhelp/screens/register_screen.dart';
 import 'package:beggarhelp/screens/welcome_screen.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Beggar Help',
       theme: ThemeData(
         fontFamily: 'Poppins',
         unselectedWidgetColor: Color(0xFF31CF2B),
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         "/": (context) => LoginScreen(),
         "/register": (context) => RegisterScreen(),
         "/company": (context) => CompanyScreen(),
+        "/donor": (context) => DonorScreen(),
         "/welcome": (context) => WelcomeScreen()
       },
     );

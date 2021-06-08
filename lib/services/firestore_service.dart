@@ -43,4 +43,24 @@ class FirestoreService {
               .toList(),
         );
   }
+
+  Future<String> getUserType(String uid) {
+    return _db
+        .collection("companies")
+        .doc(uid)
+        .get()
+        .then((snap) => snap.exists ? "company" : "donor");
+  }
+
+  Future<UserData> getUserData(String uid, String type) {
+    return _db.collection(type).doc(uid).get().then((snap) {
+      if (snap.exists) {
+        if (type == "donors") {
+          return Donor.fromFirestore(snap.data());
+        } else
+          return Company.fromFirestore(snap.data());
+      } else
+        return null;
+    });
+  }
 }

@@ -47,4 +47,8 @@ class AuthService {
     User refreshUser = auth.currentUser;
     return refreshUser;
   }
+
+  static User getCurrentUser() {
+    return FirebaseAuth.instance.currentUser;
+  }
 }

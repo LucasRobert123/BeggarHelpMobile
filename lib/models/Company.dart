@@ -35,7 +35,18 @@ class Company extends UserData {
   }
 
   @override
-  Company.fromFirestore(Map<String, dynamic> firestoreDocument)
-      : cnpj = firestoreDocument['cnpj'],
-        description = firestoreDocument['description'];
+  factory Company.fromFirestore(Map<String, dynamic> firestoreDocument) =>
+      Company(
+          id: firestoreDocument['id'],
+          name: firestoreDocument['name'],
+          phone: firestoreDocument['phone'],
+          email: firestoreDocument['email'],
+          password: firestoreDocument['password'],
+          district: firestoreDocument['district'],
+          street: firestoreDocument['street'],
+          num: firestoreDocument['num'],
+          city: firestoreDocument['city'],
+          uf: firestoreDocument['uf'],
+          cnpj: firestoreDocument['cnpj'],
+          description: firestoreDocument['description']);
 }
