@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 
 class AuthService {
   static Future<User> signUpUser({String email, String senha}) async {
@@ -30,13 +29,7 @@ class AuthService {
           await auth.signInWithEmailAndPassword(email: email, password: senha);
       user = userCredential.user;
     } on FirebaseException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('User não encontrado');
-      } else if (e.code == 'wrong-password') {
-        print("Senha incorreta");
-      } else {
-        print(e);
-      }
+      throw (e);
     }
 
     return user;

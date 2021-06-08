@@ -17,19 +17,53 @@ class _LoginScreenState extends State<LoginScreen> {
   bool stayConnected = false;
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  bool isLoading = false;
+
+  alert(msg) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text('Atenção'),
+        content: Text(msg),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => {Navigator.pop(context)},
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
 
   Future<void> signIn() async {
-    if (_formkey.currentState.validate()) {
-      User user = await AuthService.signInUser(
-        email: _emailController.text,
-        senha: _passwordController.text,
-      );
-      if (user != null) {
-        FirestoreService().getUserType(user.uid).then((type) =>
-            Navigator.pushNamedAndRemoveUntil(context, '/$type', (_) => false));
+    try {
+      setState(() {
+        isLoading = true;
+      });
+      if (_formkey.currentState.validate()) {
+        User user = await AuthService.signInUser(
+          email: _emailController.text,
+          senha: _passwordController.text,
+        );
+        if (user != null) {
+          FirestoreService().getUserType(user.uid).then((type) =>
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/$type', (_) => false));
+        }
       }
-    } else {
-      print('Erro');
+    } on FirebaseException catch (e) {
+      setState(() {
+        isLoading = true;
+      });
+      var msg = '';
+      if (e.code == 'user-not-found') {
+        msg = 'Usuário não encontrado';
+      } else if (e.code == 'wrong-password') {
+        msg = "Senha incorreta";
+      } else {
+        msg = "Ouve um erro inesperado, tente novamente";
+      }
+      alert(msg);
     }
   }
 
@@ -75,47 +109,60 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                       ),
-                      Container(
-                        margin: EdgeInsets.only(top: 8, bottom: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 24,
-                              height: 24,
-                              child: Checkbox(
-                                checkColor: Colors.white,
-                                activeColor: Color(0xFF31CF2B),
-                                value: stayConnected,
-                                onChanged: (value) {
-                                  setState(() {
-                                    stayConnected = value;
-                                  });
-                                },
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(left: 8),
-                              child: Text(
-                                'Manter-se conectado',
-                                style: TextStyle(
-                                  color: Color(0xFF31CF2B),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                      // Container(
+                      //   margin: EdgeInsets.only(top: 8, bottom: 8),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.start,
+                      //     children: [
+                      //       SizedBox(
+                      //         width: 24,
+                      //         height: 24,
+                      //         child: Checkbox(
+                      //           checkColor: Colors.white,
+                      //           activeColor: Color(0xFF31CF2B),
+                      //           value: stayConnected,
+                      //           onChanged: (value) {
+                      //             setState(() {
+                      //               stayConnected = value;
+                      //             });
+                      //           },
+                      //         ),
+                      //       ),
+                      //       Container(
+                      //         margin: EdgeInsets.only(left: 8),
+                      //         child: Text(
+                      //           'Manter-se conectado',
+                      //           style: TextStyle(
+                      //             color: Color(0xFF31CF2B),
+                      //           ),
+                      //         ),
+                      //       )
+                      //     ],
+                      //   ),
+                      // ),
                       Button(
                         width: MediaQuery.of(context).size.width,
                         heigth: 50,
-                        widget: Text(
-                          'LOGAR',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                          ),
+                        widget: Center(
+                          child: !isLoading
+                              ? Text(
+                                  'LOGAR',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: CircularProgressIndicator(
+                                    valueColor:
+                                        new AlwaysStoppedAnimation<Color>(
+                                      Colors.white,
+                                    ),
+                                  ),
+                                ),
                         ),
                         onPress: () {
                           signIn();
