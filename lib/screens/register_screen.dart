@@ -26,11 +26,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController _districtController = TextEditingController();
   TextEditingController _ufController = TextEditingController();
   TextEditingController _cityController = TextEditingController();
-  TextEditingController _typeController = TextEditingController();
+  TextEditingController _typeController = TextEditingController(text: "Doador");
   TextEditingController _cpfController = TextEditingController();
   TextEditingController _cnpjController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
 
+  @override
+  void initState() {
+    _cityController.addListener(() {
+      setState(() {
+        _city = _cityController.text;
+      });
+    });
+    _ufController.addListener(() {
+      setState(() {
+        _uf = _ufController.text;
+      });
+    });
+    _typeController.addListener(() {
+      setState(() {
+        _type = _typeController.text;
+      });
+    });
+    super.initState();
+  }
+
+  String _type = "Doador", _city = "Alfenas", _uf = "MG";
   bool _loading = false;
 
   Future<void> onRegister() async {
@@ -56,8 +77,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             street: _streetController.text,
             num: _numController.text,
             district: _districtController.text,
-            uf: _ufController.text,
-            city: _cityController.text,
+            uf: _uf,
+            city: _city,
             cpf: _cpfController.text);
       else
         user = Company(
@@ -69,8 +90,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             street: _streetController.text,
             num: _numController.text,
             district: _districtController.text,
-            uf: _ufController.text,
-            city: _cityController.text,
+            uf: _uf,
+            city: _city,
             cnpj: _cnpjController.text,
             description: _descriptionController.text);
 
@@ -108,10 +129,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Input(
                 text: 'Nome',
                 controller: _nameController,
+                keyboardType: TextInputType.name,
               ),
               Input(
                 text: 'E-mail',
                 controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -121,12 +144,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Input(
                       text: 'Telefone',
                       controller: _phoneController,
+                      keyboardType: TextInputType.phone,
                     ),
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.5 - 24,
                     child: Input(
                       text: 'Senha',
+                      obscureText: true,
                       controller: _passwordController,
                     ),
                   )
@@ -140,6 +165,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Input(
                       text: 'Rua',
                       controller: _streetController,
+                      keyboardType: TextInputType.streetAddress,
                     ),
                   ),
                   SizedBox(
@@ -147,6 +173,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Input(
                       text: 'Nº',
                       controller: _numController,
+                      keyboardType: TextInputType.number,
                     ),
                   )
                 ],
@@ -181,12 +208,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 text: "Tipo",
                 controller: _typeController,
               ),
-              _typeController.text == "Doador"
+              _type == "Doador"
                   ? Column(
                       children: [
                         Input(
                           text: 'CPF',
                           controller: _cpfController,
+                          keyboardType: TextInputType.number,
                         ),
                       ],
                     )
@@ -195,6 +223,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Input(
                           text: 'CNPJ',
                           controller: _cnpjController,
+                          keyboardType: TextInputType.number,
                         ),
                         Input(
                           text: 'Descrição',

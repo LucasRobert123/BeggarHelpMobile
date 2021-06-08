@@ -29,7 +29,7 @@ class Donor extends UserData {
         );
   @override
   Map<String, dynamic> toMap() {
-    return {'cpf': cpf};
+    return {...super.toMap(), 'cpf': cpf};
   }
 
   @override

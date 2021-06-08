@@ -31,7 +31,7 @@ class Company extends UserData {
 
   @override
   Map<String, dynamic> toMap() {
-    return {'cnpj': cnpj, 'description': description};
+    return {...super.toMap(), 'cnpj': cnpj, 'description': description};
   }
 
   @override

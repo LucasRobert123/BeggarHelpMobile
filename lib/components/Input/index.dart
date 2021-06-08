@@ -3,7 +3,14 @@ import 'package:flutter/material.dart';
 class Input extends StatelessWidget {
   final String text, error;
   final TextEditingController controller;
-  Input({this.text, this.error, this.controller});
+  final bool obscureText;
+  final TextInputType keyboardType;
+  Input(
+      {this.text,
+      this.error,
+      this.controller,
+      this.obscureText,
+      this.keyboardType});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,6 +34,8 @@ class Input extends StatelessWidget {
               color: Color(0xFF31CF2B),
             ),
           ),
+          obscureText: obscureText == null ? false : obscureText,
+          keyboardType: keyboardType,
           style: TextStyle(
             color: Color(0xFF31CF2B),
           ),
