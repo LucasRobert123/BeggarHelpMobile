@@ -12,7 +12,6 @@ class Input extends StatelessWidget {
         height: 50,
         child: TextFormField(
           controller: controller,
-          initialValue: '',
           cursorColor: Color(0xFF31CF2B),
           decoration: InputDecoration(
             labelText: text,
