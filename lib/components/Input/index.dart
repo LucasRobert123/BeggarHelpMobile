@@ -41,7 +41,7 @@ class Input extends StatelessWidget {
           style: TextStyle(
             color: Color(0xFF31CF2B),
           ),
-          validator: validator,
+          validator: (value) => validator(value),
         ),
       ),
     );

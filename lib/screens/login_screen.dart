@@ -34,125 +34,130 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 300,
-              child: Image(image: AssetImage('lib/assets/images/logo.png')),
-            ),
-            Form(
-                key: _formkey,
-                child: Column(
-                  children: [
-                    Input(
-                      controller: _emailController,
-                      text: 'E-mail',
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Email obrigatório';
-                        }
-                        return null;
-                      },
-                    ),
-                    Input(
-                      controller: _passwordController,
-                      text: 'Senha',
-                      obscureText: true,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Senha obrigatória';
-                        }
-                        return null;
-                      },
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 8, bottom: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 24,
-                            height: 24,
-                            child: Checkbox(
-                              checkColor: Colors.white,
-                              activeColor: Color(0xFF31CF2B),
-                              value: stayConnected,
-                              onChanged: (value) {
-                                setState(() {
-                                  stayConnected = value;
-                                });
-                              },
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 8),
-                            child: Text(
-                              'Manter-se conectado',
-                              style: TextStyle(
-                                color: Color(0xFF31CF2B),
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          padding: EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 300,
+                child: Image(image: AssetImage('lib/assets/images/logo.png')),
+              ),
+              Form(
+                  key: _formkey,
+                  child: Column(
+                    children: [
+                      Input(
+                        controller: _emailController,
+                        text: 'E-mail',
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Email obrigatório';
+                          }
+                          return null;
+                        },
+                      ),
+                      Input(
+                        controller: _passwordController,
+                        text: 'Senha',
+                        obscureText: true,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Senha obrigatória';
+                          } else if (value.length < 6) {
+                            return 'Senha deve ter no mínimo 6 caracteres';
+                          }
+                          return null;
+                        },
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 8, bottom: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: 24,
+                              height: 24,
+                              child: Checkbox(
+                                checkColor: Colors.white,
+                                activeColor: Color(0xFF31CF2B),
+                                value: stayConnected,
+                                onChanged: (value) {
+                                  setState(() {
+                                    stayConnected = value;
+                                  });
+                                },
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Button(
-                      width: MediaQuery.of(context).size.width,
-                      heigth: 50,
-                      widget: Text(
-                        'LOGAR',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
+                            Container(
+                              margin: EdgeInsets.only(left: 8),
+                              child: Text(
+                                'Manter-se conectado',
+                                style: TextStyle(
+                                  color: Color(0xFF31CF2B),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
-                      onPress: () {
-                        signIn();
-                      },
+                      Button(
+                        width: MediaQuery.of(context).size.width,
+                        heigth: 50,
+                        widget: Text(
+                          'LOGAR',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                        ),
+                        onPress: () {
+                          signIn();
+                        },
+                      ),
+                    ],
+                  )),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.only(top: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Não tem conta?',
+                      style: TextStyle(
+                        color: Color(0xFF31CF2B),
+                      ),
                     ),
+                    SizedBox(
+                      height: 20,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          minimumSize: Size.zero,
+                          padding: EdgeInsets.zero,
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/register');
+                        },
+                        child: Text(
+                          'Cadastre-se',
+                          style: TextStyle(
+                            color: Color(0xFF31CF2B),
+                            decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    )
                   ],
-                )),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              margin: EdgeInsets.only(top: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Não tem conta?',
-                    style: TextStyle(
-                      color: Color(0xFF31CF2B),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        minimumSize: Size.zero,
-                        padding: EdgeInsets.zero,
-                      ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/register');
-                      },
-                      child: Text(
-                        'Cadastre-se',
-                        style: TextStyle(
-                          color: Color(0xFF31CF2B),
-                          decoration: TextDecoration.underline,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            )
-          ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 class AuthService {
   static Future<User> signUpUser({String email, String senha}) async {
@@ -14,7 +15,7 @@ class AuthService {
       } else if (e.code == 'email-already-in-use') {
         print("Email ja cadastrado");
       } else {
-        print(e);
+        print('Erro');
       }
     }
 
