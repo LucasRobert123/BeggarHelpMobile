@@ -1,3 +1,4 @@
+import 'package:beggarhelp/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class CustomTabBar extends StatelessWidget {
@@ -38,7 +39,9 @@ class CustomTabBar extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+                AuthService.signOutUser(AuthService.getCurrentUser()).then(
+                    (res) => Navigator.pushNamedAndRemoveUntil(
+                        context, '/', (_) => false));
               })
         ],
       ),
