@@ -5,22 +5,24 @@ class Input extends StatelessWidget {
   final TextEditingController controller;
   final bool obscureText;
   final TextInputType keyboardType;
+  final Function validator;
   Input(
       {this.text,
       this.error,
       this.controller,
       this.obscureText,
-      this.keyboardType});
+      this.keyboardType,
+      this.validator});
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 4, bottom: 4),
-      child: SizedBox(
-        height: 50,
+      child: Container(
         child: TextFormField(
           controller: controller,
           cursorColor: Color(0xFF31CF2B),
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 13, horizontal: 10),
             labelText: text,
             errorText: error,
             border: OutlineInputBorder(),
@@ -39,6 +41,7 @@ class Input extends StatelessWidget {
           style: TextStyle(
             color: Color(0xFF31CF2B),
           ),
+          validator: validator,
         ),
       ),
     );
