@@ -27,12 +27,23 @@ class Donor extends UserData {
           city: city,
           uf: uf,
         );
+
   @override
   Map<String, dynamic> toMap() {
     return {...super.toMap(), 'cpf': cpf};
   }
 
   @override
-  Donor.fromFirestore(Map<String, dynamic> firestoreDocument)
-      : cpf = firestoreDocument['cpf'];
+  factory Donor.fromFirestore(Map<String, dynamic> firestoreDocument) => Donor(
+      id: firestoreDocument['id'],
+      name: firestoreDocument['name'],
+      phone: firestoreDocument['phone'],
+      email: firestoreDocument['email'],
+      password: firestoreDocument['password'],
+      district: firestoreDocument['district'],
+      street: firestoreDocument['street'],
+      num: firestoreDocument['num'],
+      city: firestoreDocument['city'],
+      uf: firestoreDocument['uf'],
+      cpf: firestoreDocument['cpf']);
 }

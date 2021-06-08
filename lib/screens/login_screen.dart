@@ -1,6 +1,7 @@
 import 'package:beggarhelp/components/Button/index.dart';
 import 'package:beggarhelp/components/Input/index.dart';
 import 'package:beggarhelp/services/auth_service.dart';
+import 'package:beggarhelp/services/firestore_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
         senha: _passwordController.text,
       );
       if (user != null) {
-        Navigator.pushNamedAndRemoveUntil(context, '/company', (_) => false);
+        FirestoreService().getUserType(user.uid).then((type) =>
+            Navigator.pushNamedAndRemoveUntil(context, '/$type', (_) => false));
       }
     } else {
       print('Erro');

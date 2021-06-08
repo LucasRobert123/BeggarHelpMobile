@@ -1,4 +1,7 @@
 import 'package:beggarhelp/components/CustomTabBar/index.dart';
+import 'package:beggarhelp/models/Donor.dart';
+import 'package:beggarhelp/services/auth_service.dart';
+import 'package:beggarhelp/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 
 class DonorScreen extends StatefulWidget {
@@ -9,6 +12,17 @@ class DonorScreen extends StatefulWidget {
 }
 
 class _DonorScreenState extends State<DonorScreen> {
+  Donor user;
+  @override
+  void initState() {
+    FirestoreService()
+        .getUserData(AuthService.getCurrentUser().uid, "donors")
+        .then((donor) => setState(() {
+              user = donor;
+            }));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +30,7 @@ class _DonorScreenState extends State<DonorScreen> {
         child: Column(
           children: [
             CustomTabBar(
-              name: 'Lucas',
+              name: user == null ? "Usuário" : user.name,
             ),
             Container(
               padding: EdgeInsets.all(20),
