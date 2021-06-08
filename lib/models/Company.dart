@@ -1,6 +1,6 @@
-import 'package:beggarhelp/models/User.dart';
+import 'package:beggarhelp/models/UserData.dart';
 
-class Company extends User {
+class Company extends UserData {
   String cnpj, description;
 
   Company(
@@ -10,6 +10,7 @@ class Company extends User {
       email,
       password,
       district,
+      street,
       num,
       city,
       uf,
@@ -22,6 +23,7 @@ class Company extends User {
           email: email,
           password: password,
           district: district,
+          street: street,
           num: num,
           city: city,
           uf: uf,

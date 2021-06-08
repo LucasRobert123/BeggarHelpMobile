@@ -1,12 +1,12 @@
 import 'package:beggarhelp/models/Company.dart';
 import 'package:beggarhelp/models/Donor.dart';
-import 'package:beggarhelp/models/User.dart';
+import 'package:beggarhelp/models/UserData.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreService {
   FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  Future<void> saveUser(User user) {
+  Future<void> saveUser(UserData user) {
     String collection;
     collection = user is Company ? 'companies' : 'donors';
     return _db.collection(collection).doc(user.id).set(
@@ -14,7 +14,7 @@ class FirestoreService {
         );
   }
 
-  Future<void> removeUser(User user) {
+  Future<void> removeUser(UserData user) {
     String collection;
     collection = user is Company ? 'companies' : 'donors';
     return _db.collection(collection).doc(user.id).delete();

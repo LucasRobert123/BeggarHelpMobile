@@ -1,13 +1,14 @@
-class User {
-  String id, name, phone, email, password, district, num, city, uf;
+class UserData {
+  String id, name, phone, email, password, district, street, num, city, uf;
 
-  User({
+  UserData({
     this.id,
     this.name,
     this.phone,
     this.email,
     this.password,
     this.district,
+    this.street,
     this.num,
     this.city,
     this.uf,
@@ -21,19 +22,21 @@ class User {
       'email': email,
       'password': password,
       'district': district,
+      'street': street,
       'num': num,
       'city': city,
       'uf': uf,
     };
   }
 
-  User.fromFirestore(Map<String, dynamic> firestoreDocument)
+  UserData.fromFirestore(Map<String, dynamic> firestoreDocument)
       : id = firestoreDocument['id'],
         name = firestoreDocument['name'],
         phone = firestoreDocument['phone'],
         email = firestoreDocument['email'],
         password = firestoreDocument['password'],
         district = firestoreDocument['district'],
+        street = firestoreDocument['street'],
         num = firestoreDocument['num'],
         city = firestoreDocument['city'],
         uf = firestoreDocument['uf'];

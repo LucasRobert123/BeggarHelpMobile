@@ -1,6 +1,6 @@
-import 'package:beggarhelp/models/User.dart';
+import 'package:beggarhelp/models/UserData.dart';
 
-class Donor extends User {
+class Donor extends UserData {
   String cpf;
 
   Donor({
@@ -10,6 +10,7 @@ class Donor extends User {
     email,
     password,
     district,
+    street,
     num,
     city,
     uf,
@@ -21,6 +22,7 @@ class Donor extends User {
           email: email,
           password: password,
           district: district,
+          street: street,
           num: num,
           city: city,
           uf: uf,
