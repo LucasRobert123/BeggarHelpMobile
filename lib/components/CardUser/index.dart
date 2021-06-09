@@ -43,21 +43,23 @@ class CardUser extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    SizedBox(
-                      width: 25,
-                      height: 23,
-                      child: Transform.scale(
-                        scale: 2,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.delete,
-                            size: 12,
-                            color: Color(0xFF31CF2B),
-                          ),
-                          onPressed: onRemove,
-                        ),
-                      ),
-                    ),
+                    onRemove != null
+                        ? SizedBox(
+                            width: 25,
+                            height: 23,
+                            child: Transform.scale(
+                              scale: 2,
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.delete,
+                                  size: 12,
+                                  color: Color(0xFF31CF2B),
+                                ),
+                                onPressed: onRemove,
+                              ),
+                            ),
+                          )
+                        : Container(),
                     SizedBox(
                       width: 25,
                       height: 23,

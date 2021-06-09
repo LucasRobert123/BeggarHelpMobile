@@ -37,6 +37,12 @@ class FirestoreService {
     });
   }
 
+  Future<void> removeContact(String uid, String donor) {
+    return _db.collection("companies").doc(uid).update({
+      "donors": FieldValue.arrayRemove([donor])
+    });
+  }
+
   Future<List<Donor>> getDonorsByCompanyUID(String company) async {
     List<String> donorsIds =
         await _db.collection("companies").doc(company).get().then((snap) {
@@ -48,6 +54,8 @@ class FirestoreService {
 
     if (donorsIds == null)
       return null;
+    else if (donorsIds.length == 0)
+      return [];
     else
       return _db
           .collection('donors')

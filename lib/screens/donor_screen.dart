@@ -1,5 +1,6 @@
 import 'package:beggarhelp/components/CardUser/index.dart';
 import 'package:beggarhelp/components/CustomTabBar/index.dart';
+import 'package:beggarhelp/components/Modal/index.dart';
 import 'package:beggarhelp/models/Company.dart';
 import 'package:beggarhelp/models/Donor.dart';
 import 'package:beggarhelp/services/auth_service.dart';
@@ -30,6 +31,37 @@ class _DonorScreenState extends State<DonorScreen> {
 
   @override
   Widget build(BuildContext context) {
+    itemModal(String item, IconData name) {
+      return Padding(
+        padding: EdgeInsets.only(bottom: 5),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(
+              name,
+              size: 30,
+              color: Color(0xFFEBCE34),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 5),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width - 35,
+                child: Text(
+                  item,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Color(0xFF31CF2B),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -62,8 +94,37 @@ class _DonorScreenState extends State<DonorScreen> {
                             await launch(
                                 "https://wa.me/${companies[index].phone}?text=Quero fazer uma doação!");
                           },
-                          onDetails: () {},
-                          onRemove: () {},
+                          onDetails: () {
+                            Modal.showAlertDialog(
+                              context,
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      'Detalhes',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 24,
+                                        color: Color(0xFF31CF2B),
+                                      ),
+                                    ),
+                                  ),
+                                  itemModal(companies[index].name,
+                                      Icons.account_balance),
+                                  itemModal(
+                                      companies[index].phone, Icons.phone),
+                                  itemModal(
+                                      companies[index].email, Icons.email),
+                                  itemModal(
+                                      "${companies[index].street}, ${companies[index].num},${companies[index].district},${companies[index].city}-${companies[index].uf}",
+                                      Icons.place),
+                                ],
+                              ),
+                            );
+                          },
                         ),
                       ),
                     );

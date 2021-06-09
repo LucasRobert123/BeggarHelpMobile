@@ -1,5 +1,6 @@
 import 'package:beggarhelp/components/Button/index.dart';
 import 'package:beggarhelp/components/Input/index.dart';
+import 'package:beggarhelp/components/Modal/index.dart';
 import 'package:beggarhelp/services/auth_service.dart';
 import 'package:beggarhelp/services/firestore_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -89,6 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Input(
                         controller: _emailController,
                         text: 'E-mail',
+                        keyboardType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Email obrigatório';
@@ -204,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     )
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
