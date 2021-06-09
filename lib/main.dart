@@ -20,6 +20,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Poppins',
         unselectedWidgetColor: Color(0xFF31CF2B),
+        accentColor: Color(0xFF31CF2B),
+        accentColorBrightness: Brightness.light,
       ),
       initialRoute: '/',
       routes: {

@@ -24,26 +24,43 @@ class FirestoreService {
     return _db.collection('companies').get().then((snaps) {
       if (snaps.docs.isNotEmpty) {
         return snaps.docs
-            .map((doc) => Company.fromFirestore(
-                  doc.data(),
-                ))
+            .map((doc) => Company.fromFirestore({"id": doc.id, ...doc.data()}))
             .toList();
       } else
         return null;
     });
   }
 
-  Future<List<Donor>> getDonors() {
-    return _db.collection('donors').get().then((snaps) {
-      if (snaps.docs.isNotEmpty) {
-        return snaps.docs
-            .map((doc) => Donor.fromFirestore(
-                  doc.data(),
-                ))
-            .toList();
+  Future<void> makeContact(String uid, String company) {
+    return _db.collection("companies").doc(company).update({
+      "donors": FieldValue.arrayUnion([uid])
+    });
+  }
+
+  Future<List<Donor>> getDonorsByCompanyUID(String company) async {
+    List<String> donorsIds =
+        await _db.collection("companies").doc(company).get().then((snap) {
+      if (snap.exists) {
+        return List.from(snap.data()["donors"]);
       } else
         return null;
     });
+
+    if (donorsIds == null)
+      return null;
+    else
+      return _db
+          .collection('donors')
+          .where(FieldPath.documentId, whereIn: donorsIds)
+          .get()
+          .then((snaps) {
+        if (snaps.docs.isNotEmpty) {
+          return snaps.docs
+              .map((doc) => Donor.fromFirestore({"id": doc.id, ...doc.data()}))
+              .toList();
+        } else
+          return null;
+      });
   }
 
   Future<String> getUserType(String uid) {
@@ -58,9 +75,9 @@ class FirestoreService {
     return _db.collection(type).doc(uid).get().then((snap) {
       if (snap.exists) {
         if (type == "donors") {
-          return Donor.fromFirestore(snap.data());
+          return Donor.fromFirestore({"id": snap.id, ...snap.data()});
         } else
-          return Company.fromFirestore(snap.data());
+          return Company.fromFirestore({"id": snap.id, ...snap.data()});
       } else
         return null;
     });

@@ -56,8 +56,12 @@ class _DonorScreenState extends State<DonorScreen> {
                         child: CardUser(
                           name: companies[index].name,
                           text: companies[index].street,
-                          onPress: () async => await launch(
-                              "https://wa.me/${companies[index].phone}?text=Quero fazer uma doação!"),
+                          onPress: () async {
+                            await FirestoreService()
+                                .makeContact(user.id, companies[index].id);
+                            await launch(
+                                "https://wa.me/${companies[index].phone}?text=Quero fazer uma doação!");
+                          },
                           onDetails: () {},
                           onRemove: () {},
                         ),
