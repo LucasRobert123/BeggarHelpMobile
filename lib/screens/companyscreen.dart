@@ -3,7 +3,6 @@ import 'package:beggarhelp/components/CustomTabBar/index.dart';
 import 'package:beggarhelp/components/Modal/index.dart';
 import 'package:beggarhelp/models/Company.dart';
 import 'package:beggarhelp/models/Donor.dart';
-import 'package:beggarhelp/models/UserData.dart';
 import 'package:beggarhelp/services/auth_service.dart';
 import 'package:beggarhelp/services/firestore_service.dart';
 import 'package:flutter/material.dart';

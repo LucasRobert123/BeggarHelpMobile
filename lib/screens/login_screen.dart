@@ -1,6 +1,5 @@
 import 'package:beggarhelp/components/Button/index.dart';
 import 'package:beggarhelp/components/Input/index.dart';
-import 'package:beggarhelp/components/Modal/index.dart';
 import 'package:beggarhelp/services/auth_service.dart';
 import 'package:beggarhelp/services/firestore_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
