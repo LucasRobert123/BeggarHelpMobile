@@ -50,6 +50,10 @@ class _LoginScreenState extends State<LoginScreen> {
               Navigator.pushNamedAndRemoveUntil(
                   context, '/$type', (_) => false));
         }
+      } else {
+        setState(() {
+          isLoading = false;
+        });
       }
     } on FirebaseException catch (e) {
       setState(() {
